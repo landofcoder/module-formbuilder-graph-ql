@@ -1,0 +1,62 @@
+
+type Query {
+
+    lofFormById (
+        form_id: Int @doc(description: "Query by id.")
+    ) : Form @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Form") @doc(description: "Query by Get form by id.")
+
+    lofFormList(
+            search: String @doc(description: "Performs a full-text search using the specified key words."),
+            filter: FormFilterInput @doc(description: "Identifies which product attributes to search for and return."),
+            pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+            currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+           ):Forms @resolver(class: "\\Lof\\FormbuilderGraphQl\\Model\\Resolver\\Forms") @doc(description: "The Forms product query searches for Forms that match the criteria specified in the search and filter attributes")
+}
+
+type Form {
+    form_id  : Int  @doc(description: "Form id.")
+    title  : String  @doc(description: "title.")
+    identifier  : String  @doc(description: "identifier.")
+    email_receive: String @doc(description: "Email Receive." )
+    thanks_email_template: String @doc(description: "Thanks Email Template." )
+    email_template: String @doc(description: "Email Template." )
+    show_captcha: Int @doc(description: "Show Captcha." )
+    show_toplink: Int @doc(description: "Show Top Link." )
+    submit_button_text: String @doc(description: "Submit Button Text." )
+    success_message: String @doc(description: "Success Message." )
+    creation_time  : String  @doc(description: "creation_time.")
+    update_time  : String  @doc(description: "update_time.")
+    before_form_content  : String  @doc(description: "Before Form Content.")
+    after_form_content  : String  @doc(description: "After Form Content.")
+    status  : Int  @doc(description: "Status.")
+    design  : String  @doc(description: "Design.")
+    redirect_link  : String  @doc(description: "Redirect Link.")
+    page_layout  : String  @doc(description: "Page Layout.")
+    page_title  : String  @doc(description: "Page Title.")
+    layout_update_xml  : String  @doc(description: "Layout Update XML.")
+    meta_keywords  : String  @doc(description: "meta_keywords.")
+    meta_description  : String  @doc(description: "meta_description.")
+    thankyou_field	  : String  @doc(description: "Thankyou Field.")
+    thankyou_email_template	  : String  @doc(description: "Thankyou Email Template.")
+    submit_text_color	  : String  @doc(description: "Submit Text Color.")
+    submit_background_color	  : String  @doc(description: "Submit Background Color.")
+    submit_hover_color	  : String  @doc(description: "Submit Hover Color.")
+    input_hover_color	  : String  @doc(description: "Input Hover Color.")
+    custom_template	  : String  @doc(description: "Custom Template.")
+    sender_email_field	  : String  @doc(description: "Sender Email Field.")
+    sender_name_field	  : String  @doc(description: "Sender Name Field.")
+    tags  : Int  @doc(description: "tags.")
+
+}
+
+type Forms {
+    total_count: Int @doc(description: "The number of forms returned")
+    items: [Form] @doc(description: "An array of forms that match the specified search criteria")
+}
+
+input FormFilterInput {
+    form_id: FilterTypeInput @doc(description: "Form ID")
+    title: FilterTypeInput @doc(description: "Title")
+    status: FilterTypeInput @doc(description: "Status")
+    or: FormFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
