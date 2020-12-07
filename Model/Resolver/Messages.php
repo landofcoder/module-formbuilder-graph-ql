@@ -16,7 +16,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Lof\Formbuilder\Api\FormbuilderRepositoryInterface;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 
-class Forms implements ResolverInterface
+class Messages implements ResolverInterface
 {
 
     /**
@@ -57,7 +57,7 @@ class Forms implements ResolverInterface
         if ($args['pageSize'] < 1) {
             throw new GraphQlInputException(__('pageSize value must be greater than 0.'));
         }
-        $searchCriteria = $this->searchCriteriaBuilder->build( 'lof_formbuilder_form', $args );
+        $searchCriteria = $this->searchCriteriaBuilder->build( 'lof_formbuilder_message', $args );
         $searchCriteria->setCurrentPage( $args['currentPage'] );
         $searchCriteria->setPageSize( $args['pageSize'] );
 

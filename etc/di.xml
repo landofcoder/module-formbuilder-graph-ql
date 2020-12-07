@@ -7,4 +7,11 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\GraphQl\Query\Resolver\Argument\FieldEntityAttributesPool">
+        <arguments>
+            <argument name="attributesInstances" xsi:type="array">
+                <item name="lof_formbuilder_message" xsi:type="object">\Lof\FormbuilderGraphQl\Model\Resolver\FilterArgumentMessage</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
