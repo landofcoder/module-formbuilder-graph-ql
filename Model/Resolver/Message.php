@@ -15,7 +15,7 @@ use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Lof\Formbuilder\Api\FormbuilderRepositoryInterface;
 
-class Form implements ResolverInterface
+class Message implements ResolverInterface
 {
 
 
@@ -41,6 +41,6 @@ class Form implements ResolverInterface
         array $value = null,
         array $args = null
     ) {
-        return $this->formbuilder->getFormById($args['form_id']);
+        return $this->formbuilder->getMessageById($args['message_id']);
     }
 }

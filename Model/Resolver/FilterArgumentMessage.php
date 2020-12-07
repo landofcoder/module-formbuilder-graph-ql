@@ -9,10 +9,10 @@ use Magento\Framework\GraphQl\ConfigInterface;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\FieldEntityAttributesInterface;
 
 /**
- * Class FilterArgumentForm
+ * Class FilterArgumentMessage
  * @package Lof\FormbuilderGraphQl\Model\Resolver
  */
-class FilterArgumentForm implements FieldEntityAttributesInterface
+class FilterArgumentMessage implements FieldEntityAttributesInterface
 {
     /** @var ConfigInterface */
     private $config;
@@ -33,7 +33,7 @@ class FilterArgumentForm implements FieldEntityAttributesInterface
     {
         $fields = [];
         /** @var Field $field */
-        foreach ($this->config->getConfigElement('Form')->getFields() as $field) {
+        foreach ($this->config->getConfigElement('Message')->getFields() as $field) {
             $fields[$field->getName()] = [
                 'type' => 'String',
                 'fieldName' => $field->getName(),
