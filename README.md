@@ -1,6 +1,6 @@
 # Mage2 Module Lof FormbuilderGraphQl
 
-    ``lof/module-FormbuilderGraphQl``
+    ``landofcoder/module-formbuilder-graph-ql``
 
  - [Main Functionalities](#markdown-header-main-functionalities)
  - [Installation](#markdown-header-installation)
@@ -29,7 +29,7 @@ magento 2 formbuilder graphql extension
     - public repository `packagist.org`
     - public github repository as vcs
  - Add the composer repository to the configuration by running `composer config repositories.repo.magento.com composer https://repo.magento.com/`
- - Install the module composer by running `composer require lof/module-FormbuilderGraphQl`
+ - Install the module composer by running `composer require landofcoder/module-formbuilder-graph-ql`
  - enable the module by running `php bin/magento module:enable Lof_FormbuilderGraphQl`
  - apply database updates by running `php bin/magento setup:upgrade`\*
  - Flush the cache by running `php bin/magento cache:flush`
