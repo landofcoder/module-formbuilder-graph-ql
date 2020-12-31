@@ -4,6 +4,7 @@
 		<sequence>
 			<module name="Magento_GraphQl"/>
 			<module name="Magento_UrlRewriteGraphQl"/>
+			<module name="Lof_Formbuilder"/>
 		</sequence>
 	</module>
 </config>
