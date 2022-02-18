@@ -6,7 +6,6 @@ type Query {
     ) : Form @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Form") @doc(description: "Query by Get form by id.")
 
     lofFormBuilderFormList(
-        search: String @doc(description: "Performs a full-text search using the specified key words.")
         filter: FormFilterInput @doc(description: "Identifies which product attributes to search for and return.")
         pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional.")
         currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
@@ -18,8 +17,7 @@ type Query {
     ) : Message @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Message") @doc(description: "Query get my submitted message by id.")
 
     lofFormBuilderMessageList(
-        search: String @doc(description: "Performs a full-text search using the specified key words.")
-        filter: FormFilterInput @doc(description: "Identifies which product attributes to search for and return.")
+        filter: MessageFilterInput @doc(description: "Identifies which product attributes to search for and return.")
         pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional.")
         currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
         sort: FormMessageSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
@@ -39,7 +37,6 @@ type Form {
     before_form_content  : String  @doc(description: "Before Form Content.")
     after_form_content  : String  @doc(description: "After Form Content.")
     status  : Int  @doc(description: "Status.")
-    design  : String  @doc(description: "Design.")
     redirect_link  : String  @doc(description: "Redirect Link.")
     page_layout  : String  @doc(description: "Page Layout.")
     page_title  : String  @doc(description: "Page Title.")
@@ -52,9 +49,33 @@ type Form {
     input_hover_color	  : String  @doc(description: "Input Hover Color.")
     custom_template	  : String  @doc(description: "Custom Template.")
     tags  : String  @doc(description: "Tags.")
+    design : [FormField] @doc(description: "Design form fields.")
     stores : [Int] @doc(description: "Store Ids.")
     customer_group_ids : [Int] @doc(description: "Customer Group Ids.")
+}
 
+type FormFieldOption {
+    label : String @doc(description: "Field Option label")
+    checked : Boolean @doc(description: "Field Option checked")
+}
+
+type FormField {
+    label : String @doc(description: "Field label.")
+    field_type : String @doc(description: "Field field_type.")
+    required : Boolean @doc(description: "Field required.")
+    field_options : String @doc(description: "Field field_options.")
+    fieldcol : Int @doc(description: "Field fieldcol.")
+    wrappercol : Int @doc(description: "Field wrappercol.")
+    cid : String @doc(description: "Field cid.")
+    inline_css : String @doc(description: "Field inline_css.")
+    field_size : String @doc(description: "Field field_size.")
+    font_weight : String @doc(description: "Field font_weight.")
+    color_text : String @doc(description: "Field color_text.")
+    font_size : String @doc(description: "Field font_size.")
+    color_label : String @doc(description: "Field color_label.")
+    validation : String @doc(description: "Field validation.")
+    include_blank_option : String @doc(description: "Field include_blank_option.")
+    options : [FormFieldOption] @doc(description: "Field options.")
 }
 
 type Message {
@@ -90,6 +111,15 @@ input FormFilterInput {
     identifier  : FilterTypeInput  @doc(description: "identifier.")
     tags  : FilterTypeInput  @doc(description: "Tags.")
     or: FormFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input MessageFilterInput {
+    message_id: FilterTypeInput @doc(description: "Message ID")
+    form_id: FilterTypeInput @doc(description: "Form ID")
+    product_id: FilterTypeInput @doc(description: "Product ID")
+    creation_time  : FilterTypeInput  @doc(description: "creation_time.")
+    message  : FilterTypeInput  @doc(description: "message.")
+    or: MessageFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
 }
 
 

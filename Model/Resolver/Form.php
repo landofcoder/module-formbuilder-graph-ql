@@ -56,7 +56,7 @@ class Form implements ResolverInterface
         array $args = null
     ) {
 
-        if (!empty($args['form_id'])) {
+        if (empty($args['form_id'])) {
             throw new GraphQlInputException(__('"form_id" value should be specified'));
         }
 

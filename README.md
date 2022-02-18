@@ -35,8 +35,56 @@ magento 2 formbuilder graphql extension
  - Flush the cache by running `php bin/magento cache:flush`
 
 
-## Configuration
+## Queries
 
+1. Get Form design by Id
+
+```
+query {
+    lofFormBuilderFormById (form_id: Int!) {
+        title
+        identifier
+        show_captcha
+        show_toplink
+        submit_button_text
+        redirect_link
+        creation_time
+        before_form_content
+        after_form_content
+        success_message
+        page_title
+        meta_keywords
+        meta_description
+        submit_text_color
+        submit_background_color
+        submit_hover_color
+        input_hover_color
+        tags
+        design {
+            cid
+            label
+            field_type
+            required
+            field_options
+            fieldcol
+            wrappercol
+            inline_css
+            field_size
+            font_weight
+            color_text
+            font_size
+            color_label
+            validation
+            include_blank_option
+            options {
+                label
+                checked
+            }
+        }
+        stores
+    }
+}
+```
 
 
 
