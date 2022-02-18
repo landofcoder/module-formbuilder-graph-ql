@@ -62,7 +62,7 @@ class Form implements ResolverInterface
 
         $customerGroupId = 0;
         /** @var ContextInterface $context */
-        if (!$context->getExtensionAttributes()->getIsCustomer()) {
+        if ($context->getExtensionAttributes()->getIsCustomer()) {
             $customer = $this->getCustomer->execute($context);
             $customerGroupId = $customer->getGroupId();
         }
