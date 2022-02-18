@@ -13,8 +13,9 @@ use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Exception\GraphQlNoSuchEntityException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Lof\Formbuilder\Api\FormbuilderRepositoryInterface;
 use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
+use Lof\Formbuilder\Api\FormbuilderRepositoryInterface;
+use Lof\Formbuilder\Model\Form;
 
 class Forms implements ResolverInterface
 {
@@ -23,6 +24,7 @@ class Forms implements ResolverInterface
      * @var SearchCriteriaBuilder
      */
     private $searchCriteriaBuilder;
+
     /**
      * @var FormbuilderRepositoryInterface
      */
@@ -57,15 +59,21 @@ class Forms implements ResolverInterface
         if ($args['pageSize'] < 1) {
             throw new GraphQlInputException(__('pageSize value must be greater than 0.'));
         }
+        $args["filter"]["status"] = ["eq" => Form::STATUS_ENABLED];
         $searchCriteria = $this->searchCriteriaBuilder->build( 'lof_formbuilder_form', $args );
         $searchCriteria->setCurrentPage( $args['currentPage'] );
         $searchCriteria->setPageSize( $args['pageSize'] );
-
         $searchResult = $this->formbuilder->getList( $searchCriteria );
+        $totalPages = $args['pageSize'] ? ((int)ceil($searchResult->getTotalCount() / $args['pageSize'])) : 0;
 
         return [
             'total_count' => $searchResult->getTotalCount(),
             'items'       => $searchResult->getItems(),
+            'page_info' => [
+                'page_size' => $args['pageSize'],
+                'current_page' => $args['currentPage'],
+                'total_pages' => $totalPages
+            ]
         ];
     }
 }
