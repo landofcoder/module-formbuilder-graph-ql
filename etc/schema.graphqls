@@ -2,7 +2,7 @@
 type Query {
 
     lofFormBuilderFormById (
-        form_id: Int @doc(description: "Query by id.")
+        form_id: Int! @doc(description: "Query by id.")
     ) : Form @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Form") @doc(description: "Query by Get form by id.")
 
     lofFormBuilderFormList(
