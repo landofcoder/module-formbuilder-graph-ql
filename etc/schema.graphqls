@@ -2,35 +2,32 @@
 type Query {
 
     lofFormBuilderFormById (
-        form_id: Int @doc(description: "Query by id.")
+        form_id: Int! @doc(description: "Query by id.")
     ) : Form @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Form") @doc(description: "Query by Get form by id.")
 
     lofFormBuilderFormList(
-        search: String @doc(description: "Performs a full-text search using the specified key words."),
-        filter: FormFilterInput @doc(description: "Identifies which product attributes to search for and return."),
-        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
-        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        filter: FormFilterInput @doc(description: "Identifies which product attributes to search for and return.")
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional.")
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
+        sort: FormSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
     ):Forms @resolver(class: "\\Lof\\FormbuilderGraphQl\\Model\\Resolver\\Forms") @doc(description: "The Forms query searches for Forms that match the criteria specified in the search and filter attributes")
 
     lofFormBuilderMessage (
-        message_id: Int @doc(description: "Query by id.")
-    ) : Message @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Message") @doc(description: "Query by Get message by id.")
+        message_id: Int! @doc(description: "Query by message_id.")
+    ) : Message @resolver( class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Message") @doc(description: "Query get my submitted message by id.")
 
     lofFormBuilderMessageList(
-        search: String @doc(description: "Performs a full-text search using the specified key words."),
-        filter: FormFilterInput @doc(description: "Identifies which product attributes to search for and return."),
-        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
-        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
-    ):Messages @resolver(class: "\\Lof\\FormbuilderGraphQl\\Model\\Resolver\\Messages") @doc(description: "The Message query searches for Messages that match the criteria specified in the search and filter attributes")
+        filter: MessageFilterInput @doc(description: "Identifies which product attributes to search for and return.")
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional.")
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
+        sort: FormMessageSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
+    ) : Messages @resolver(class: "\\Lof\\FormbuilderGraphQl\\Model\\Resolver\\Messages") @doc(description: "The query searches for My Messages that match the criteria specified in the search and filter attributes")
 }
 
 type Form {
     form_id  : Int  @doc(description: "Form id.")
     title  : String  @doc(description: "title.")
     identifier  : String  @doc(description: "identifier.")
-    email_receive: String @doc(description: "Email Receive." )
-    thanks_email_template: String @doc(description: "Thanks Email Template." )
-    email_template: String @doc(description: "Email Template." )
     show_captcha: Int @doc(description: "Show Captcha." )
     show_toplink: Int @doc(description: "Show Top Link." )
     submit_button_text: String @doc(description: "Submit Button Text." )
@@ -40,38 +37,55 @@ type Form {
     before_form_content  : String  @doc(description: "Before Form Content.")
     after_form_content  : String  @doc(description: "After Form Content.")
     status  : Int  @doc(description: "Status.")
-    design  : String  @doc(description: "Design.")
     redirect_link  : String  @doc(description: "Redirect Link.")
     page_layout  : String  @doc(description: "Page Layout.")
     page_title  : String  @doc(description: "Page Title.")
     layout_update_xml  : String  @doc(description: "Layout Update XML.")
     meta_keywords  : String  @doc(description: "meta_keywords.")
     meta_description  : String  @doc(description: "meta_description.")
-    thankyou_field	  : String  @doc(description: "Thankyou Field.")
-    thankyou_email_template	  : String  @doc(description: "Thankyou Email Template.")
     submit_text_color	  : String  @doc(description: "Submit Text Color.")
     submit_background_color	  : String  @doc(description: "Submit Background Color.")
     submit_hover_color	  : String  @doc(description: "Submit Hover Color.")
     input_hover_color	  : String  @doc(description: "Input Hover Color.")
     custom_template	  : String  @doc(description: "Custom Template.")
-    sender_email_field	  : String  @doc(description: "Sender Email Field.")
-    sender_name_field	  : String  @doc(description: "Sender Name Field.")
     tags  : String  @doc(description: "Tags.")
+    design : [FormField] @doc(description: "Design form fields.")
     stores : [Int] @doc(description: "Store Ids.")
     customer_group_ids : [Int] @doc(description: "Customer Group Ids.")
+}
 
+type FormFieldOption {
+    label : String @doc(description: "Field Option label")
+    checked : Boolean @doc(description: "Field Option checked")
+}
+
+type FormField {
+    label : String @doc(description: "Field label.")
+    field_type : String @doc(description: "Field field_type.")
+    required : Boolean @doc(description: "Field required.")
+    field_options : String @doc(description: "Field field_options.")
+    fieldcol : Int @doc(description: "Field fieldcol.")
+    wrappercol : Int @doc(description: "Field wrappercol.")
+    cid : String @doc(description: "Field cid.")
+    inline_css : String @doc(description: "Field inline_css.")
+    field_size : String @doc(description: "Field field_size.")
+    font_weight : String @doc(description: "Field font_weight.")
+    color_text : String @doc(description: "Field color_text.")
+    font_size : String @doc(description: "Field font_size.")
+    color_label : String @doc(description: "Field color_label.")
+    validation : String @doc(description: "Field validation.")
+    include_blank_option : String @doc(description: "Field include_blank_option.")
+    options : [FormFieldOption] @doc(description: "Field options.")
 }
 
 type Message {
     message_id  : Int  @doc(description: "Message id.")
     form_id  : Int  @doc(description: "Form Id.")
     product_id  : Int  @doc(description: "Product Id.")
-    customer_id  : Int  @doc(description: "Customer Id.")
     subject: String @doc(description: "Subject." )
     email_from: String @doc(description: "Email Form." )
     creation_time: String @doc(description: "Creation Time." )
     message: String @doc(description: "Message." )
-    ip_address: String @doc(description: "IP Address." )
     params: String @doc(description: "Params." )
     form_data: String @doc(description: "Form Data." )
 }
@@ -79,19 +93,50 @@ type Message {
 type Messages {
     total_count: Int @doc(description: "The number of messages returned")
     items: [Message] @doc(description: "An array of messages that match the specified search criteria")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    sort_fields: SortFields @doc(description: "An object that includes the default sort field and all available sort fields.") @resolver(class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Message\\SortFields")
 }
 
 type Forms {
     total_count: Int @doc(description: "The number of forms returned")
     items: [Form] @doc(description: "An array of forms that match the specified search criteria")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    sort_fields: SortFields @doc(description: "An object that includes the default sort field and all available sort fields.") @resolver(class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\Form\\SortFields")
 }
 
 input FormFilterInput {
     form_id: FilterTypeInput @doc(description: "Form ID")
     title: FilterTypeInput @doc(description: "Title")
     status: FilterTypeInput @doc(description: "Status")
-    title  : FilterTypeInput  @doc(description: "title.")
     identifier  : FilterTypeInput  @doc(description: "identifier.")
     tags  : FilterTypeInput  @doc(description: "Tags.")
     or: FormFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
 }
+
+input MessageFilterInput {
+    message_id: FilterTypeInput @doc(description: "Message ID")
+    form_id: FilterTypeInput @doc(description: "Form ID")
+    product_id: FilterTypeInput @doc(description: "Product ID")
+    creation_time  : FilterTypeInput  @doc(description: "creation_time.")
+    message  : FilterTypeInput  @doc(description: "message.")
+    or: MessageFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+
+input FormSortInput @doc(description: "FormSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order. It's possible to sort orders using searchable attributes with enabled 'Use in Filter Options' option")
+{
+    form_id: SortEnum @doc(description: "Sort by the form_id assigned to each order.")
+    creation_time: SortEnum @doc(description: "Sort by the creation_time (default).")
+    identifier: SortEnum @doc(description: "Sort by the identifier assigned to each order.")
+    tags: SortEnum @doc(description: "Sort by the tags assigned to each order.")
+}
+
+input FormMessageSortInput @doc(description: "FormMessageSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order. It's possible to sort orders using searchable attributes with enabled 'Use in Filter Options' option")
+{
+    message_id: SortEnum @doc(description: "Sort by the message_id assigned to each order.")
+    creation_time: SortEnum @doc(description: "Sort by the creation_time (default).")
+    form_id: SortEnum @doc(description: "Sort by the form_id assigned to each order.")
+    product_id: SortEnum @doc(description: "Sort by the product_id assigned to each order.")
+    email_from: SortEnum @doc(description: "Sort by the email_from assigned to each order.")
+}
+

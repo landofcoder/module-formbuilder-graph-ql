@@ -33,7 +33,7 @@ class FilterArgumentMessage implements FieldEntityAttributesInterface
     {
         $fields = [];
         /** @var Field $field */
-        foreach ($this->config->getConfigElement('Message')->getFields() as $field) {
+        foreach ($this->config->getConfigElement('MessageFilterInput')->getFields() as $field) {
             $fields[$field->getName()] = [
                 'type' => 'String',
                 'fieldName' => $field->getName(),
