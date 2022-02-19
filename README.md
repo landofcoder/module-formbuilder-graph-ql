@@ -1,6 +1,6 @@
-# Mage2 Module Lof FormbuilderGraphQl
+# Magento 2 Module Lof_FormbuilderGraphQl
 
-    ``landofcoder/module-formbuilder-graph-ql``
+``landofcoder/module-formbuilder-graph-ql``
 
  - [Main Functionalities](#markdown-header-main-functionalities)
  - [Installation](#markdown-header-installation)
@@ -10,7 +10,11 @@
 
 
 ## Main Functionalities
-magento 2 formbuilder graphql extension
+Support Graph Ql for Form builder extension, ready for PWA
+
+## Require
+- Magento version 2.3.5 or latest
+- Formbuilder version 1.1.4 or higher
 
 ## Installation
 \* = in production please use the `--keep-generated` option
@@ -34,8 +38,10 @@ magento 2 formbuilder graphql extension
  - apply database updates by running `php bin/magento setup:upgrade`\*
  - Flush the cache by running `php bin/magento cache:flush`
 
+## TODO
+- Add query submit form data
 
-## Queries
+## Support Queries
 
 1. Get Form design by Id
 
@@ -86,6 +92,71 @@ query {
 }
 ```
 
+2. Get list public form profiles
+
+```
+{
+  lofFormBuilderFormList(filter: {}, pageSize: 5) {
+    items {
+        form_id
+        title
+        identifier
+        show_toplink
+        creation_time
+        page_title
+        tags
+    }
+    total_count
+    page_info {
+      page_size
+      current_page
+      total_pages
+    }
+  }
+}
+```
+
+3. Get my submitted messages list
+
+```
+{
+  lofFormBuilderMessageList (filter: {}, pageSize: 10, currentPage: 1) {
+    items {
+      message_id
+      form_id
+      product_id
+      subject
+      email_from
+      creation_time
+      message
+      
+    }
+    total_count
+    page_info {
+      page_size
+      current_page
+      total_pages
+    }
+  }
+}
+```
+
+4. Get my submitted message by ID
+
+
+```
+{
+  lofFormBuilderMessage (message_id: Int!) {
+    message_id
+    form_id
+    product_id
+    subject
+    email_from
+    creation_time
+    message
+  }
+}
+```
 
 
 
