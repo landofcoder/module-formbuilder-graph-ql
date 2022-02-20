@@ -67,6 +67,7 @@ query {
         tags
         design {
             cid
+            field_id
             label
             field_type
             required
