@@ -39,7 +39,6 @@ Support Graph Ql for Form builder extension, ready for PWA
  - Flush the cache by running `php bin/magento cache:flush`
 
 ## TODO
-- Add query submit form data
 
 ## Support Queries
 
