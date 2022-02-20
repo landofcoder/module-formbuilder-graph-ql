@@ -24,6 +24,10 @@ type Query {
     ) : Messages @resolver(class: "\\Lof\\FormbuilderGraphQl\\Model\\Resolver\\Messages") @doc(description: "The query searches for My Messages that match the criteria specified in the search and filter attributes")
 }
 
+type Mutation {
+    lofFormbuilderSubmit(input: SubmitFormInput!): Int! @doc(description: "Submit form data, response message_id") @resolver(class: "Lof\\FormbuilderGraphQl\\Model\\Resolver\\SubmitForm")
+}
+
 type Form {
     form_id  : Int  @doc(description: "Form id.")
     title  : String  @doc(description: "title.")
@@ -140,3 +144,15 @@ input FormMessageSortInput @doc(description: "FormMessageSortInput specifies the
     email_from: SortEnum @doc(description: "Sort by the email_from assigned to each order.")
 }
 
+input SubmitFormFieldInput @doc(description: "SubmitFormFieldInput for submit form field data") {
+    cid : String! @doc(description: "cid - form field cid")
+    field_name : String! @doc(description: "field_name - form field field_name")
+    value : String! @doc(description: "value - form field value")
+}
+
+input SubmitFormInput @doc(description: "SubmitFormInput with form info and array of form fields") {
+    form_id: Int! @doc(description: "form_id - form builder profile id")
+    product_id: Int @doc(description: "product_id field")
+    captcha: String @doc(description: "captcha field")
+    fields: [SubmitFormFieldInput]! @doc(description: "submit form fields data")
+}

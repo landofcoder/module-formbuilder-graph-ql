@@ -158,6 +158,27 @@ query {
 }
 ```
 
+5. POST form data
 
+```
+mutation {
+    lofFormbuilderSubmit (input : SubmitFormInput!)
+}
+```
 
+SubmitFormInput:
 
+```
+form_id: Int!
+product_id : Int
+captcha: String
+fields : [SubmitFormFieldInput]!
+```
+
+SubmitFormFieldInput:
+
+```
+cid : String!
+field_name : String!
+value: String!
+```
