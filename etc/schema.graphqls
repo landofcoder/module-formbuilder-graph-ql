@@ -1,4 +1,8 @@
 
+type StoreConfig {
+    lofformbuilder_enabled  : String  @doc(description: "Query by lofformbuilder_enabled.")
+}
+
 type Query {
 
     lofFormBuilderFormById (
@@ -64,13 +68,14 @@ type FormFieldOption {
 }
 
 type FormField {
+    cid : String @doc(description: "Field cid.")
+    field_id : String @doc(description: "Field field_id.")
     label : String @doc(description: "Field label.")
     field_type : String @doc(description: "Field field_type.")
     required : Boolean @doc(description: "Field required.")
     field_options : String @doc(description: "Field field_options.")
     fieldcol : Int @doc(description: "Field fieldcol.")
     wrappercol : Int @doc(description: "Field wrappercol.")
-    cid : String @doc(description: "Field cid.")
     inline_css : String @doc(description: "Field inline_css.")
     field_size : String @doc(description: "Field field_size.")
     font_weight : String @doc(description: "Field font_weight.")
