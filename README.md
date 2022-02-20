@@ -158,6 +158,81 @@ query {
 }
 ```
 
+5. POST form data
 
+```
+mutation {
+    lofFormbuilderSubmit (input : SubmitFormInput!)
+}
+```
 
+SubmitFormInput:
 
+```
+form_id: Int!
+product_id : Int
+captcha: String
+fields : [SubmitFormFieldInput]!
+```
+
+SubmitFormFieldInput:
+
+```
+cid : String!
+field_name : String!
+value: String!
+```
+
+Example:
+
+```
+mutation {
+  lofFormbuilderSubmit(
+    input: {
+      form_id: 2
+      product_id: 0
+      captcha: ""
+      fields: [
+        {
+          cid: "name"
+          field_name: "loffield_name2"
+          value: "test name from api"
+        }
+        {
+          cid: "email"
+          field_name: "loffield_email2"
+          value: "testapi@gmail.com"
+        }
+        { cid: 
+          "phone"
+          field_name: "loffield_phone2"
+          value: "01243655555" 
+        }
+        {
+          cid: "content"
+          field_name: "loffield_content2"
+          value: "test content from api"
+        }
+        { 
+          cid: "age" 
+          field_name: "loffield_age2"
+          value: "Yes" 
+        }
+        { 
+          cid: "c5"
+          field_name: "loffield_c52"
+          value: "" 
+        }
+        { 
+          cid: "agreement"
+          field_name: "loffield_agreement2"
+          value: "Yes" 
+        }
+      ]
+    }
+  )
+}
+
+```
+
+**TODO**: support upload files form field
