@@ -157,7 +157,7 @@ query {
 }
 ```
 
-5. POST form data
+5. POST form data - required customer logged in
 
 ```
 mutation {
