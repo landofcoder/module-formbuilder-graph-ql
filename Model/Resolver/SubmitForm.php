@@ -70,7 +70,7 @@ class SubmitForm implements ResolverInterface
         if (false === $context->getExtensionAttributes()->getIsCustomer()) {
             throw new GraphQlAuthorizationException(__('The current customer isn\'t authorized.'));
         }
-        if (empty($args['input'] || empty($args["input"]["form_id"])) || empty($args["input"]["fields"])) {
+        if (empty($args['input']) || empty($args["input"]["form_id"]) || empty($args["input"]["fields"])) {
             throw new GraphQlInputException(__('"input" value should be specified'));
         }
 
