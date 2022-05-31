@@ -65,7 +65,7 @@ query {
         submit_hover_color
         input_hover_color
         tags
-        design {
+        design_fields {
             cid
             field_id
             label
