@@ -67,6 +67,15 @@ class Form implements ResolverInterface
             $customerGroupId = $customer->getGroupId();
         }
         $store = $context->getExtensionAttributes()->getStore();
-        return $this->formbuilder->getAvailableFormById((int)$args['form_id'], $customerGroupId, $store->getId());
+        $form = $this->formbuilder->getAvailableFormById((int)$args['form_id'], $customerGroupId, $store->getId());
+        $designFields = $form->getDesignFields();
+        $newDesignFields = [];
+        if ($designFields) {
+            foreach($designFields as $_field) {
+                $newDesignFields[] = $_field ? $_field->__toArray() : [];
+            }
+            $form->setDesignFields($newDesignFields);
+        }
+        return $form;
     }
 }

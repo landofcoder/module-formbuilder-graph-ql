@@ -57,7 +57,7 @@ type Form {
     input_hover_color	  : String  @doc(description: "Input Hover Color.")
     custom_template	  : String  @doc(description: "Custom Template.")
     tags  : String  @doc(description: "Tags.")
-    design : [FormField] @doc(description: "Design form fields.")
+    design_fields : [FormField] @doc(description: "Design form fields.")
     stores : [Int] @doc(description: "Store Ids.")
     customer_group_ids : [Int] @doc(description: "Customer Group Ids.")
 }
